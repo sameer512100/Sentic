@@ -10,7 +10,7 @@ const startServer = async () => {
     try {
         await connectDB();
         app.listen(PORT, () => {
-            console.log(`SENTIC server running on port ${PORT}`);
+            console.log(`SENTIC server running on http://localhost:${PORT} 🚀`);
         });
     } catch (error) {
         console.error("Failed to start server", error);

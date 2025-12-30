@@ -1,6 +1,6 @@
 import createError from "http-errors";
 import Report from "../models/Report.model.js";
-import { uploadImageToS3 } from "./s3.service.js";
+import { encodeImageToBase64 } from "./image.service.js";
 import { analyzeImage } from "./ml.service.js";
 import { STATUS } from "../utils/constants.js";
 
@@ -9,11 +9,12 @@ export const createReportPipeline = async ({ file, payload }) => {
     throw createError(400, "Image is required");
   }
 
-  const imageUrl = await uploadImageToS3(file);
+  const imageData = encodeImageToBase64(file);
 
   let mlResult;
   try {
-    mlResult = await analyzeImage(imageUrl);
+    const base64DataUrl = `data:${file.mimetype};base64,${imageData}`;
+    mlResult = await analyzeImage(base64DataUrl);
   } catch (err) {
     mlResult = { issueType: "pothole", severity: 50 };
   }
@@ -21,7 +22,8 @@ export const createReportPipeline = async ({ file, payload }) => {
   const { area, latitude, longitude, name, phone } = payload;
 
   const report = await Report.create({
-    imageUrl,
+    imageData,
+    imageMimeType: file.mimetype,
     issueType: mlResult.issueType,
     severity: mlResult.severity,
     location: {
@@ -38,7 +40,7 @@ export const createReportPipeline = async ({ file, payload }) => {
 
 export const getPublicReports = async () => {
   return Report.find()
-    .select("imageUrl issueType severity location status createdAt")
+    .select("imageMimeType issueType severity location status createdAt")
     .sort({ createdAt: -1 });
 };
 

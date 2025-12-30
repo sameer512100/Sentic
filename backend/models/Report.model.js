@@ -20,7 +20,8 @@ const reporterSchema = new mongoose.Schema(
 
 const reportSchema = new mongoose.Schema(
   {
-    imageUrl: { type: String, required: true },
+    imageData: { type: String, required: true },
+    imageMimeType: { type: String, default: "image/jpeg" },
     issueType: { type: String, enum: ISSUE_TYPES, required: true },
     severity: { type: Number, min: 0, max: 100, required: true },
     location: locationSchema,
