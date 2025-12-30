@@ -17,7 +17,7 @@ app.get("/health", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200).json({ success: true, message: "Welcome to the SENTIC backend API" });
+  res.send("Welcome to the SENTIC backend API");
 });
 
 app.use("/api/reports", reportRoutes);
