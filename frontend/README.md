@@ -1,16 +1,81 @@
-# React + Vite
+# SENTIC Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Civic issue reporting and prioritization platform frontend built with React, TypeScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📸 Image-based civic issue reporting (potholes, garbage, fallen trees)
+- 🤖 AI-powered severity analysis (0-100 score)
+- 🗺️ Location-based issue tracking
+- 👮 Admin dashboard for issue management
+- 📊 Public reports dashboard with filtering and sorting
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 18 + TypeScript
+- Vite
+- Tailwind CSS
+- Shadcn UI components
+- Axios for API calls
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## Environment Variables
+
+Create a `.env` file:
+
+```
+VITE_API_BASE_URL=http://localhost:3000
+```
+
+## Project Structure
+
+```
+src/
+├── components/       # Reusable UI components
+├── pages/           # Route pages
+├── lib/             # API client and utilities
+├── hooks/           # Custom React hooks
+└── App.tsx          # Main app component
+```
+
+## Admin Credentials
+
+- **Username**: admin
+- **Password**: admin123
+
+## Deployment
+
+To deploy the frontend:
+
+1. **Vercel** (recommended):
+   ```bash
+   npm run build
+   vercel --prod
+   ```
+
+2. **Netlify**:
+   ```bash
+   npm run build
+   # Then deploy the `dist` folder to Netlify
+   ```
+
+3. **GitHub Pages or other hosts**:
+   ```bash
+   npm run build
+   # Deploy the `dist` folder
+   ```
+
+Make sure to update `VITE_API_BASE_URL` to your production backend URL.
+
